@@ -1,0 +1,22 @@
+{
+  "name": "robostorecet",
+  "version": "1.0.0",
+  "description": "NodeJS server for RoboStore ",
+  "main": "server.js",
+  "scripts": {
+    "test": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/robostorecet/RoboStoreServer.git"
+  },
+  "author": "Shabeeb R P",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/robostorecet/RoboStoreServer/issues"
+  },
+  "homepage": "https://github.com/robostorecet/RoboStoreServer#readme",
+  "dependencies": {
+    "express": "^4.14.0"
+  }
+}

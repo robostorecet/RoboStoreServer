@@ -1,4 +1,5 @@
 var express = require('express');
+var MongoClient = require('mongodb').MongoClient;
 var app = express();
 
 // set the port of our application
@@ -15,7 +16,22 @@ var port = process.env.PORT || 8080;
 app.get('/', function(req, res) {
 
     // ejs render automatically looks in the views folder
-    res.json({name:"Shabeeb",age:21});
+    	MongoClient.connect(process.env.PROD_MONGODB, function (err, db) {
+	  if (err)
+	    console.log('Unable to connect to the mongoDB server. Error:', err);
+	  else {
+	    //console.log('Connection established to');
+	    var collection = db.collection("Demo");
+	    collection.find().toArray(function (err, result){
+      		if (err)
+       		    console.log(err);
+		else
+			res.json(result[0]);
+	    });
+	   db.close();
+	  }
+	});
+
 });
 
 app.listen(port, function() {

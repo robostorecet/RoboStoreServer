@@ -5,7 +5,7 @@ var app = express();
 // process.env.PORT lets the port be set by Heroku
 var port = process.env.PORT || 8080;
 // set the home page route
-app.get('/', router.getItems);
+app.get('/items', router.getItems);
 app.listen(port, function () {
     console.log("Our app is running on http://localhost:" + port);
 });

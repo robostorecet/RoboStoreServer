@@ -48,5 +48,9 @@ function itemParameters(req) {
     }
     return query;
 }
-//connect to the the databse
+//handler for order post request
+exports.postOrder = function (req, res) {
+        res.send(req.query.name);
+    }
+    //connect to the the databse
 db.connect();

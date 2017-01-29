@@ -1,18 +1,52 @@
 var db = require('./db');
-//connect to the the databse
-db.connect();
+exports.getTypes = function (req, res) {
+        console.log("Get types handler");
+        if (db.get()) {
+            var collection = db.get().collection("Items");
+            collection.distinct("type", {}, function (err, result) {
+                if (err) console.log(err);
+                else res.json(result);
+            });
+        }
+        else {
+            res.send({
+                error: "wait for 5 seconds then reaload, everything will be ok"
+            });
+        }
+    }
+    //get items of specified type
 exports.getItems = function (req, res) {
     console.log("Get Items handler");
     if (db.get()) {
+        //if no type query parameter then retrive all items
         var collection = db.get().collection("Items");
-        collection.find().toArray(function (err, result) {
+        collection.find(itemParameters(req), {
+            _id: 0
+        }).toArray(function (err, result) {
             if (err) console.log(err);
-            else res.json(result);
+            else res.json(result)
         });
     }
     else {
         res.send({
-            error: "wait for  second then reaload, everything will be ok"
+            error: "wait for 5 seconds then reaload, everything will be ok"
         });
     }
+};
+
+function itemParameters(req) {
+    var query = {}
+    if (req.params.type) {
+        //if req.params.type then retrive only items of the specified type
+        query = {
+            type: req.params.type
+        };
+    }
+    if (req.params.name) {
+        //if req.query.type then retrive only items of the specified type
+        query.name = req.params.name;
+    }
+    return query;
 }
+//connect to the the databse
+db.connect();

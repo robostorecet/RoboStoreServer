@@ -13,6 +13,6 @@ app.use(bodyParser.json());
 app.get('/types', router.getTypes);
 app.get('/items/:type?/:name?', router.getItems);
 app.post('/order', router.postOrder)
-app.listen(port, '192.168.0.15', function () {
+app.listen(port, function () {
     console.log("Our app is running on http://localhost:" + port);
 });

@@ -50,7 +50,7 @@ function itemParameters(req) {
 }
 //handler for order post request
 exports.postOrder = function (req, res) {
-        res.send(req.query.name);
+        console.log(JSON.stringify(req.body));
     }
     //connect to the the databse
 db.connect();

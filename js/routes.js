@@ -54,8 +54,16 @@ exports.postOrder = function (req, res) {
         if (db.get()) {
             var collection = db.get().collection("Order");
             collection.insert(req.body, function (err, result) {
-                if (err) console.log("error item not inserted");
-                else console.log("item inserted + " + JSON.stringify(result));
+                if (err) {
+                    console.log("error item not inserted");
+                    res.send({
+                        error: "error item not inserted"
+                    });
+                }
+                else {
+                    console.log("item inserted + " + JSON.stringify(result));
+                    res.json(result);
+                }
             });
         }
         else {

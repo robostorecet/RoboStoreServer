@@ -62,7 +62,7 @@ exports.postOrder = function (req, res) {
                 }
                 else {
                     console.log("item inserted + " + JSON.stringify(result));
-                    res.json(result);
+                    res.send("[" + JSON.stringify(result) + "]");
                 }
             });
         }

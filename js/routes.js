@@ -1,20 +1,20 @@
 var db = require('./db');
 exports.getTypes = function (req, res) {
-        console.log("Get types handler");
-        if (db.get()) {
-            var collection = db.get().collection("Items");
-            collection.distinct("type", {}, function (err, result) {
-                if (err) console.log(err);
-                else res.json(result);
-            });
-        }
-        else {
-            res.send({
-                error: "wait for 5 seconds then reaload, everything will be ok"
-            });
-        }
+    console.log("Get types handler");
+    if (db.get()) {
+        var collection = db.get().collection("Items");
+        collection.distinct("type", {}, function (err, result) {
+            if (err) console.log(err);
+            else res.json(result);
+        });
     }
-    //get items of specified type
+    else {
+        res.send({
+            error: "wait for 5 seconds then reaload, everything will be ok"
+        });
+    }
+};
+//get items of specified type
 exports.getItems = function (req, res) {
     console.log("Get Items handler");
     if (db.get()) {
@@ -33,22 +33,21 @@ exports.getItems = function (req, res) {
         });
     }
 };
-
-function itemParameters(req) {
-    var query = {}
-    if (req.params.type) {
-        //if req.params.type then retrive only items of the specified type
-        query = {
-            type: req.params.type
-        };
+itemParameters = function itemParameters(req) {
+        var query = {}
+        if (req.params.type) {
+            //if req.params.type then retrive only items of the specified type
+            query = {
+                type: req.params.type
+            };
+        }
+        if (req.params.name) {
+            //if req.query.type then retrive only items of the specified type
+            query.name = req.params.name;
+        }
+        return query;
     }
-    if (req.params.name) {
-        //if req.query.type then retrive only items of the specified type
-        query.name = req.params.name;
-    }
-    return query;
-}
-//handler for order post request
+    //handler for order post request
 exports.getNotes = function (req, res) {
     console.log("get notes handler");
     if (db.get()) {
@@ -69,7 +68,7 @@ exports.getNotes = function (req, res) {
             error: "wait for 5 seconds then reaload, everything will be ok"
         });
     }
-}
+};
 exports.postOrder = function (req, res) {
     console.log("Post order handler");
     if (db.get()) {
@@ -95,29 +94,29 @@ exports.postOrder = function (req, res) {
             error: "wait for 5 seconds then reaload, everything will be ok"
         });
     }
-}
+};
 exports.postNotes = function (req, res) {
-        console.log("Post Notes handler");
-        if (db.get()) {
-            var collection = db.get().collection("Notes");
-            collection.insert(req.body, function (err, result) {
-                if (err) {
-                    console.log("error item not inserted");
-                    res.send({
-                        error: "error item not inserted"
-                    });
-                }
-                else {
-                    console.log("item inserted + " + JSON.stringify(result));
-                    res.json(result);
-                }
-            });
-        }
-        else {
-            res.send({
-                error: "wait for 5 seconds then reaload, everything will be ok"
-            });
-        }
+    console.log("Post Notes handler");
+    if (db.get()) {
+        var collection = db.get().collection("Notes");
+        collection.insert(req.body, function (err, result) {
+            if (err) {
+                console.log("error item not inserted");
+                res.send({
+                    error: "error item not inserted"
+                });
+            }
+            else {
+                console.log("item inserted + " + JSON.stringify(result));
+                res.json(result);
+            }
+        });
     }
-    //connect to the the databse
+    else {
+        res.send({
+            error: "wait for 5 seconds then reaload, everything will be ok"
+        });
+    }
+};
+//connect to the the databse
 db.connect();

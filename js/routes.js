@@ -54,8 +54,8 @@ exports.getNotes = function (req, res) {
         //if no type query parameter then retrive all items
         var collection = db.get().collection("Notes");
         collection.find({
-            branch: req.params.branch.toLowerCase()
-            , sem: req.params.sem.toLowerCase()
+            branch: req.params.branch
+            , sem: req.params.sem
         }, {
             _id: 0
         }).toArray(function (err, result) {

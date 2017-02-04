@@ -74,7 +74,7 @@ exports.postOrder = function (req, res) {
     console.log("Post order handler");
     if (db.get()) {
         var date = new Date();
-        req.body.date = date.getDate() + "/" + date.getMonth() + "/" + date.getYear();
+        req.body.date = date.getDate() + "-" + date.getMonth() + "-" + date.getYear();
         console.log(req.body);
         var collection = db.get().collection("Order");
         collection.insert(req.body, function (err, result) {

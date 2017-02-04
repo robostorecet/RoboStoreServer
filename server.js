@@ -11,8 +11,10 @@ var port = process.env.PORT || 8080;
 }));*/
 app.use(bodyParser.json());
 app.get('/types', router.getTypes);
-app.get('/items/:type?/:name?', router.getItems);
-app.post('/order', router.postOrder)
+app.get('/items/:type/:name', router.getItems);
+app.get('/notes/:branch/:sem', router.getNotes);
+app.post('/order', router.postOrder);
+app.post('/notes', router.postNotes);
 app.listen(port, function () {
     console.log("Our app is running on http://localhost:" + port);
 });

@@ -14,6 +14,7 @@ app.use(bodyParser.json());
 app.get('/types', router.getTypes);
 app.get('/items/:type?/:name?', router.getItems);
 app.get('/notes/:branch/:sem', router.getNotes);
+app.get('/reports', router.getReports);
 //app.get('books/:branch/:sem', router.getBooks);
 app.post('/order', router.postOrder);
 app.post('/notes', router.postNotes);

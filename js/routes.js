@@ -69,6 +69,24 @@ exports.getNotes = function (req, res) {
         });
     }
 };
+exports.getReports = function (req, res) {
+    console.log("get reports handler");
+    if (db.get()) {
+        //if no type query parameter then retrive all items
+        var collection = db.get().collection("Reports");
+        collection.find({}, {
+            _id: 0
+        }).toArray(function (err, result) {
+            if (err) console.log(err);
+            else res.json(result)
+        });
+    }
+    else {
+        res.send({
+            error: "wait for 5 seconds then reaload, everything will be ok"
+        });
+    }
+};
 exports.postOrder = function (req, res) {
     console.log("Post order handler");
     if (db.get()) {
